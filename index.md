@@ -2,8 +2,10 @@
 layout: home
 search_exclude: true
 ---
-A modified blog for CSA Based on Fastpages- Tirth Thakkar & Haseeb Beg   
-
+Eshaan Kumar (Scrum Master)
+Miheer Purandare (Frontend)
+Eshaan Reddy (Devops)
+Anagha Ashtewale
 
 
 # Posts
