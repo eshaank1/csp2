@@ -36,7 +36,7 @@ Ensure the clock is responsive and adapts to various screen sizes.
 Optimize for both desktop and mobile experiences.
 
 User Guide:
-Include a brief user guide or tutorial on how to read the binary clock.
+Include a brief README on how to read the binary clock.
 Provide a link to additional resources for users interested in understanding binary representation.
 Timezone Support:
 Allow users to select their timezone and adjust the clock accordingly.
