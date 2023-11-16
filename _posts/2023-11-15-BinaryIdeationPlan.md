@@ -1,10 +1,10 @@
 ---
 toc: true
-comments: true
+comments: false
 layout: post
 title: Ideation for binary
-type: plans
-courses: { csp: {week: 13, categories: [4.A]} }
+type: tangibles
+courses: { compsci: {week: 0} }
 ---
 Binary Clock Ideation:
 
@@ -52,5 +52,7 @@ Ensure the clock is accessible to users with disabilities by following best prac
 Social Sharing:
 Add social media sharing options for users to share their customized binary clocks.
 Encourage users to showcase their clocks with unique themes.
+
+![Alt Text](../images/csp.png)
 
 
