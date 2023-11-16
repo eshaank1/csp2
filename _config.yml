@@ -1,9 +1,9 @@
-title: Nighthawk-Pages
+title: CSP Team Repo Tri 2
 description: "August 2023 to June 2024"
 owner_name: Eshaan Kumar
 github_username: eshaank1
-github_repo: "Nighthawk-Pages"
-baseurl: "/Nighthawk-Pages"
+github_repo: "csp2"
+baseurl: "/csp2"
 remote_theme: jekyll/minima
 # remote_theme: pages-themes/dinky@v0.2.0
 # remote_theme: pages-themes/minimal@v0.2.0
