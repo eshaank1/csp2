@@ -12,31 +12,41 @@
             height: 100vh;
             margin: 0;
             font-family: 'Arial', sans-serif;
+            background-color: #282c34;
+            color: #61dafb;
         }
 
         #currentTime {
+            font-size: 24px;
             margin-bottom: 20px;
+            background-color: #61dafb;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(97, 218, 251, 0.5);
         }
 
         .binary-clock {
             display: grid;
-            grid-template-rows: repeat(3, 50px);
+            grid-template-rows: repeat(3, 60px);
             gap: 20px;
         }
 
         .binary-row {
             display: flex;
-            gap: 5px;
+            gap: 10px;
         }
 
         .binary-digit {
-            width: 25px;
-            height: 50px;
-            border: 1px solid #333;
+            width: 40px;
+            height: 60px;
+            border: 2px solid #61dafb;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 24px;
+            background-color: #282c34;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(97, 218, 251, 0.5);
         }
     </style>
 </head>
