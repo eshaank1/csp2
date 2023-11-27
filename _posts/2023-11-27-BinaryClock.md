@@ -8,19 +8,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
             height: 100vh;
             margin: 0;
             font-family: 'Arial', sans-serif;
         }
 
+        #currentTime {
+            margin-bottom: 20px;
+        }
+
         .binary-clock {
             display: grid;
-            grid-template-columns: repeat(6, 50px);
+            grid-template-rows: repeat(3, 50px);
+            gap: 20px;
+        }
+
+        .binary-row {
+            display: flex;
             gap: 5px;
         }
 
         .binary-digit {
-            width: 50px;
+            width: 25px;
             height: 50px;
             border: 1px solid #333;
             display: flex;
@@ -31,26 +41,40 @@
     </style>
 </head>
 <body>
-    <div class="binary-clock" id="binaryClock"></div>
+    <div id="currentTime"></div>
+    <div class="binary-clock" id="binaryClock">
+        <div class="binary-row" id="hourRow"></div>
+        <div class="binary-row" id="minuteRow"></div>
+        <div class="binary-row" id="secondRow"></div>
+    </div>
 
     <script>
         function updateBinaryClock() {
-            const binaryClock = document.getElementById('binaryClock');
+            const hourRow = document.getElementById('hourRow');
+            const minuteRow = document.getElementById('minuteRow');
+            const secondRow = document.getElementById('secondRow');
+            const currentTime = document.getElementById('currentTime');
             const time = new Date();
 
             const hours = time.getHours().toString(2).padStart(6, '0');
             const minutes = time.getMinutes().toString(2).padStart(6, '0');
             const seconds = time.getSeconds().toString(2).padStart(6, '0');
 
-            const binaryTime = hours + minutes + seconds;
+            updateBinaryRow(hourRow, hours);
+            updateBinaryRow(minuteRow, minutes);
+            updateBinaryRow(secondRow, seconds);
 
-            binaryClock.innerHTML = '';
+            currentTime.textContent = `Current Time: ${time.toLocaleTimeString()}`;
+        }
 
-            for (let i = 0; i < binaryTime.length; i++) {
+        function updateBinaryRow(rowElement, binaryValue) {
+            rowElement.innerHTML = '';
+
+            for (let i = 0; i < binaryValue.length; i++) {
                 const binaryDigit = document.createElement('div');
                 binaryDigit.classList.add('binary-digit');
-                binaryDigit.textContent = binaryTime[i];
-                binaryClock.appendChild(binaryDigit);
+                binaryDigit.textContent = binaryValue[i];
+                rowElement.appendChild(binaryDigit);
             }
         }
 
