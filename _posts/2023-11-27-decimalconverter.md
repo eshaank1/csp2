@@ -7,12 +7,6 @@ type: tangibles
 courses: { compsci: {week: 0} }
 ---
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> c830d6166f522deb731a36685a1d203652f93f7f
 <html lang="en">
 <head>
     <meta charset="UTF-8">
