@@ -1,3 +1,12 @@
+---
+toc: true
+comments: false
+layout: post
+title: Binary Clock
+type: tangibles
+courses: { compsci: {week: 0} }
+---
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
