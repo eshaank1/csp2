@@ -1,9 +1,10 @@
 ---
 layout: page
-title: About Me
+title: About Us
 permalink: /about/
 ---
 
-A Fastpages clone, for CSA - Tirth Thakkar & Haseeb Beg
-
-
+Eshaan Kumar: Scrum Master, likes dogs
+Eashaan Reddy: Devops, works at walmart
+Anagha Ashtewale: Backend, goes to del norte
+Miheer Purandare: Frontend
