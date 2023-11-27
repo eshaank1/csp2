@@ -7,6 +7,7 @@ type: tangibles
 courses: { compsci: {week: 0} }
 ---
 
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,14 +15,61 @@ courses: { compsci: {week: 0} }
     <title>Binary-Decimal Converter</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
             text-align: center;
-            margin: 40px;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #4285f4;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            color: #555;
+        }
+
+        input {
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4285f4;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #357ae8;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        #binaryResult {
+            color: #0f9d58;
+        }
+
+        #decimalResult {
+            color: #db4437;
         }
     </style>
 </head>
 <body>
-    <h2>Binary to Decimal Converter</h2>
+    <h2>Binary-Decimal Converter</h2>
 
     <label for="decimalInput">Enter Decimal Number:</label>
     <input type="number" id="decimalInput" placeholder="Enter decimal number">
@@ -43,6 +91,7 @@ courses: { compsci: {week: 0} }
                 binaryResult.textContent = `Binary: ${binaryValue}`;
             } else {
                 binaryResult.textContent = 'Please enter a valid decimal number.';
+                binaryResult.style.color = '#db4437';
             }
         }
 
@@ -55,9 +104,9 @@ courses: { compsci: {week: 0} }
                 decimalResult.textContent = `Decimal: ${decimalValue}`;
             } else {
                 decimalResult.textContent = 'Please enter a valid binary number.';
+                decimalResult.style.color = '#db4437';
             }
         }
     </script>
 </body>
 </html>
-
