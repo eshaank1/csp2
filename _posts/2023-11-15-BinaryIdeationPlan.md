@@ -2,10 +2,12 @@
 toc: true
 comments: false
 layout: post
-title: Ideation for binary
-type: tangibles
+title: Binary Ideation Plan
+type: plans
 courses: { compsci: {week: 0} }
 ---
+
+
 Binary Clock Ideation:
 
 Binary Representation:
