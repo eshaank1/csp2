@@ -7,9 +7,6 @@ type: tangibles
 courses: { compsci: {week: 0} }
 ---
 
-
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,12 +16,12 @@ courses: { compsci: {week: 0} }
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 20px;
+            margin: 40px;
         }
     </style>
 </head>
 <body>
-    <h2>Binary-Decimal Converter</h2>
+    <h2>Binary to Decimal Converter</h2>
 
     <label for="decimalInput">Enter Decimal Number:</label>
     <input type="number" id="decimalInput" placeholder="Enter decimal number">
