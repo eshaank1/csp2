@@ -4,7 +4,7 @@ comments: false
 layout: post
 title: Binary Palindromes
 type: tangibles
-courses: { compsci: {week: 0} }
+courses: { compsci: {week: 1} }
 ---
 
 <html lang="en">
