@@ -4,7 +4,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Binary Quiz</title>
     <style>
-        /* Your CSS styles remain unchanged */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        input {
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
