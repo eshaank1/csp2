@@ -2,7 +2,7 @@
 toc: true
 comments: false
 layout: post
-title: binary palindromes
+title: Binary Palindromes
 type: tangibles
 courses: { compsci: {week: 0} }
 ---
