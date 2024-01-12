@@ -82,7 +82,7 @@ courses: { compsci: {week: 0} }
     <p id="decimalResult"></p>
 
     <script>
-        function convertDecimalToBinary() {
+        function convertDecimalToBinary() { 
             const decimalInput = document.getElementById('decimalInput').value;
             const binaryResult = document.getElementById('binaryResult');
 
