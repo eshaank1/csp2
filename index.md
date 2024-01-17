@@ -3,13 +3,13 @@ layout: home
 search_exclude: true
 ---
 
-Anagha Ashtewale (Scrum Master)
+Eshaan Kumar (Scrum Master)
 
 Miheer Purandare (Frontend)
 
 Eashaan Reddy (Devops)
 
-Eshaan Kumar (Backend)
+Anagha Ashtewale (Backend)
 
 
 
