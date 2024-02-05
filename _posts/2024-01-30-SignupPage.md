@@ -2,7 +2,7 @@
 toc: true
 comments: false
 layout: post
-title: Login Page
+title: Signup Page
 type: hacks
 ---
 
