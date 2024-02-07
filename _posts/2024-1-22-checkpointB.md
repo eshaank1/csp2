@@ -1,3 +1,12 @@
+---
+toc: true
+comments: false
+layout: post
+title: CPT Ideation Plan
+type: plans
+courses: { compsci: {week: 0} }
+---
+
 frontend: Miheer
 HTML design, search bar, bug fixes
 
