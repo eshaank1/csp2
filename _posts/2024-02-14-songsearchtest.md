@@ -149,6 +149,7 @@
 
         <div id="results">
             <h2>Search Results</h2>
+            <button id="shuffle-button">Shuffle</button> <!-- New shuffle button -->
             <div id="loader" class="loader" style="display: none;"></div>
             <ul id="song-list"></ul>
         </div>
@@ -201,7 +202,7 @@
                 return;
             }
 
-            // Randomly hide some results
+
             results.forEach(song => {
                 const shouldHide = Math.random() < 0.5; // Adjust the probability as needed
                 if (!shouldHide) {
@@ -215,6 +216,28 @@
                     songList.appendChild(listItem);
                 }
             });
+
+            document.getElementById("shuffle-button").addEventListener("click", function () {
+                shuffleResults(results);
+            });
+        }
+
+        function shuffleResults(results) {
+            const songList = document.getElementById("song-list");
+            const items = Array.from(songList.children);
+            items.forEach(item => {
+                songList.removeChild(item);
+            });
+            const shuffledResults = shuffleArray(results);
+            displayResults(shuffledResults);
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
         }
     </script>
 </body>
