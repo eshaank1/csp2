@@ -157,11 +157,19 @@
 
     <script>
         document.getElementById("search-button").addEventListener("click", function () {
+            performSearch();
+        });
+
+        document.getElementById("filter-select").addEventListener("change", function () {
+            performSearch();
+        });
+
+        function performSearch() {
             const searchTerm = document.getElementById("song-search").value;
             const sortBy = document.getElementById("sort-select").value;
             const filterBy = document.getElementById("filter-select").value;
             searchForSongs(searchTerm, sortBy, filterBy);
-        });
+        }
 
         function searchForSongs(searchTerm, sortBy, filterBy) {
             document.getElementById("loader").style.display = "block";
@@ -170,7 +178,7 @@
             let apiUrl = `https://itunes.apple.com/search?term=${searchTerm}&entity=song&limit=10&sort=${sortBy}`;
 
             if (filterBy) {
-                apiUrl += `&genre=${filterBy}`;
+                apiUrl += `&genre=${encodeURIComponent(filterBy)}`;
             }
 
             fetch(apiUrl)
@@ -194,15 +202,19 @@
                 return;
             }
 
+            // Randomly hide some results
             results.forEach(song => {
-                const listItem = document.createElement("li");
-                listItem.className = "song-item";
-                const albumImage = document.createElement("img");
-                albumImage.src = song.artworkUrl100;
-                listItem.appendChild(albumImage);
-                listItem.innerHTML += `<strong>${song.trackName}</strong> by ${song.artistName}`;
-                listItem.innerHTML += `<audio controls><source src="${song.previewUrl}" type="audio/mpeg"></audio>`;
-                songList.appendChild(listItem);
+                const shouldHide = Math.random() < 0.5; // Adjust the probability as needed
+                if (!shouldHide) {
+                    const listItem = document.createElement("li");
+                    listItem.className = "song-item";
+                    const albumImage = document.createElement("img");
+                    albumImage.src = song.artworkUrl100;
+                    listItem.appendChild(albumImage);
+                    listItem.innerHTML += `<strong>${song.trackName}</strong> by ${song.artistName}`;
+                    listItem.innerHTML += `<audio controls><source src="${song.previewUrl}" type="audio/mpeg"></audio>`;
+                    songList.appendChild(listItem);
+                }
             });
         }
     </script>
