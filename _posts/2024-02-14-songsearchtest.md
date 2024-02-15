@@ -1,15 +1,3 @@
----
-toc: true
-comments: false
-layout: post
-title: Song Search test
-type: plans
-courses: { compsci: {week: 0} }
----
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,19 +5,118 @@ courses: { compsci: {week: 0} }
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Song Search</title>
     <style>
-        /* Global styles remain the same */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
 
-        /* Container styles remain the same */
+        #container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: linear-gradient(to bottom right, #66ccff, #6699ff);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-        /* Header styles remain the same */
+        h1 {
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
 
-        /* Search box styles remain the same */
+        #search-box {
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-        /* Results styles remain the same */
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+            color: #fff;
+        }
 
-        /* Song list styles remain the same */
+        input[type="text"],
+        select {
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
 
-        /* Loading spinner styles remain the same */
+        button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            text-align: center;
+        }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #007bff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        #song-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .song-item {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .song-item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+
+        .song-item strong {
+            color: #007bff;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            #container {
+                padding: 10px;
+            }
+
+            .song-item img {
+                width: 80px;
+                height: 80px;
+            }
+        }
     </style>
 </head>
 <body>
