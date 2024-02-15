@@ -5,117 +5,118 @@
     <title>Song Search</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            margin: 0;
-            padding: 0;
-        }
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; 
+    margin: 0;
+    padding: 0;
+}
 
-        #container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background: linear-gradient(to bottom right, #66ccff, #6699ff);
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+#container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: linear-gradient(to bottom, #4e73df, #224abe); 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
 
-        h1 {
-            text-align: center;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
+h1 {
+    text-align: center;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+}
 
-        #search-box {
-            margin-bottom: 20px;
-            text-align: center;
-        }
+#search-box {
+    margin-bottom: 20px;
+    text-align: center;
+}
 
-        label {
-            font-weight: bold;
-            margin-right: 10px;
-            color: #fff;
-        }
+label {
+    font-weight: bold;
+    margin-right: 10px;
+    color: #fff;
+}
 
-        input[type="text"],
-        select {
-            padding: 8px;
-            border-radius: 4px;
-            border: none;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
+input[type="text"],
+select {
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 10px; 
+    width: calc(100% - 20px); 
+}
 
-        button {
-            padding: 8px 20px;
-            border: none;
-            border-radius: 4px;
-            background-color: #007bff;
-            color: #fff;
-            cursor: pointer;
-        }
+button {
+    padding: 10px 20px; 
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s; 
+}
 
-        button:hover {
-            background-color: #0056b3;
-        }
+button:hover {
+    background-color: #0056b3;
+}
 
-        #results {
-            text-align: center;
-        }
+#results {
+    text-align: center;
+    margin-top: 20px; 
+}
 
-        .loader {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #007bff;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
+.loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+#song-list {
+    list-style: none;
+    padding: 0;
+}
 
-        #song-list {
-            list-style: none;
-            padding: 0;
-        }
+.song-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff; 
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
 
-        .song-item {
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+.song-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    margin-right: 20px; 
+    object-fit: cover; 
+}
 
-        .song-item img {
-            width: 100px;
-            height: 100px;
-            border-radius: 8px;
-            margin-right: 10px;
-        }
+.song-item strong {
+    color: #007bff;
+}
 
-        .song-item strong {
-            color: #007bff;
-        }
+audio {
+    width: 100%;
+    margin-top: 20px; 
+}
 
-        audio {
-            width: 100%;
-            margin-top: 10px;
-        }
+@media (max-width: 600px) {
+    #container {
+        padding: 10px;
+    }
 
-        @media (max-width: 600px) {
-            #container {
-                padding: 10px;
-            }
-
-            .song-item img {
-                width: 80px;
-                height: 80px;
-            }
-        }
+    .song-item img {
+        width: 80px;
+        height: 80px;
+    }
+}
     </style>
 </head>
 <body>
