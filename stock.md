@@ -6,16 +6,16 @@ title: StockSense
 type: hacks
 ---
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Stock Manager</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
-        .stock-list { margin-top: 20px; }
-        .stock-item { margin-bottom: 10px; }
-        input, button { margin: 5px 0; }
+        input, button { margin: 5px 0; display: block; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
     </style>
 </head>
 <body>
@@ -29,7 +29,20 @@ type: hacks
     </form>
 
     <h2>Stocks</h2>
-    <div id="stocksList" class="stock-list"></div>
+    <table id="stocksTable">
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Shares</th>
+                <th>Purchase Price</th>
+                <th>Current Price</th>
+                <th>User ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Stocks will be loaded here -->
+        </tbody>
+    </table>
 
     <script>
         document.getElementById('addStockForm').onsubmit = async function(e) {
@@ -69,13 +82,15 @@ type: hacks
             try {
                 const response = await fetch('http://127.0.0.1:8055/api/stock/stocks');
                 const stocks = await response.json();
-                const stocksList = document.getElementById('stocksList');
-                stocksList.innerHTML = ''; // Clear existing stocks
+                const stocksTableBody = document.getElementById('stocksTable').getElementsByTagName('tbody')[0];
+                stocksTableBody.innerHTML = ''; // Clear existing stocks
                 stocks.forEach(stock => {
-                    const stockItem = document.createElement('div');
-                    stockItem.className = 'stock-item';
-                    stockItem.innerHTML = `<strong>${stock.company_name}</strong> - Shares: ${stock.shares}, Purchase Price: ${stock.purchase_price}, Current Price: ${stock.current_price || 'N/A'}`;
-                    stocksList.appendChild(stockItem);
+                    let row = stocksTableBody.insertRow();
+                    row.insertCell(0).innerText = stock.company_name;
+                    row.insertCell(1).innerText = stock.shares;
+                    row.insertCell(2).innerText = stock.purchase_price.toFixed(2);
+                    row.insertCell(3).innerText = stock.current_price ? stock.current_price.toFixed(2) : 'N/A';
+                    row.insertCell(4).innerText = stock.userID;
                 });
             } catch (error) {
                 console.error('Error fetching stocks:', error);
