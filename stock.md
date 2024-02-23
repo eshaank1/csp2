@@ -6,167 +6,85 @@ title: StockSense
 type: hacks
 ---
 
-
-
-
-
-
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StockSense</title>
+    <title>Stock Manager</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            text-align: center;
-            padding: 20px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            width: 300px;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-        }
-        .button-container button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            flex: 1;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #result {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .button-spacing {
-            margin-right: 10px;
-        }
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .stock-list { margin-top: 20px; }
+        .stock-item { margin-bottom: 10px; }
+        input, button { margin: 5px 0; }
     </style>
-
+</head>
 <body>
-    <div class="container">
-    <label class="switch">
-    <input type="checkbox" id="tempSwitch" onclick="getMetric()">
-    <span class="slider round"></span>
-</label>
+    <h2>Add Stock</h2>
+    <form id="addStockForm">
+        <input type="text" id="companyName" placeholder="Company Name" required />
+        <input type="number" id="shares" placeholder="Shares" required />
+        <input type="number" step="0.01" id="purchasePrice" placeholder="Purchase Price" required />
+        <input type="hidden" id="userID" value="1" /> <!-- Adjust the value based on your user IDs -->
+        <button type="submit">Add Stock</button>
+    </form>
 
-
-     
-
-        <input type="text" id="location" placeholder="Enter Stock Name" autofocus onkeyup="handleKeyPress(event)">
-        <div class="button-container">
-            <button class="button-spacing" onclick="getWindSpeed()">Stock Price</button>
-            <button class="button-spacing" onclick="getTemperature()">Trend Chart</button>
-            <button class="button-spacing" onclick="getPrecipitation()">Time of Day</button>
-        </div>
-        <div id="result"></div>
-    </div>
-
+    <h2>Stocks</h2>
+    <div id="stocksList" class="stock-list"></div>
 
     <script>
-        let isMetric = false;
+        document.getElementById('addStockForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const companyName = document.getElementById('companyName').value;
+            const shares = document.getElementById('shares').value;
+            const purchasePrice = document.getElementById('purchasePrice').value;
+            const userID = document.getElementById('userID').value;
 
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-            }
-        }
-
-        function getWindSpeed() {
-            fetchWeatherData('wind_mph');
-        }
-
-
-
-        function getTemperature() {
-            fetchWeatherData('feelslike_f');
-        }
-
-        function getPrecipitation() {
-            fetchWeatherData('precip_in');
-        }
-
-        function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-
-        function getMetric() {
-            isMetric = !isMetric;
-        }
-
-        function fetchWeatherData(dataType) {
-            const locationInput = document.getElementById('location');
-            const resultDiv = document.getElementById('result');
-            const location = capitalizeFirstLetter(locationInput.value.trim());
-        
-
-            if (location === '') {
-                resultDiv.innerText = 'Please enter a location';
-                return;
-            }
-
-            resultDiv.innerText = 'Loading...';
-
-            fetch('http://localhost:8531/api/weather/' + location)
-                .then(response => response.json())
-                .then(data => {
-                    let imageFetchUrl = 'http://localhost:8531/api/cityimage/' + location;
-                    fetch(imageFetchUrl)
-                        .then(response => response.json())
-                        .then(imageData => {
-                            let imageUrl = imageData.image_url; // Assuming the URL is stored in a field named 'url'
-                            console.log("IMAGE_URL===="+ imageUrl)
-                            var image = document.getElementById('weatherIcon')
-                            image.src = data["current"]["weatherIcon_url"]
-
-                         
-                            
-                            let imgElement = document.createElement('img');
-                            imgElement.src = imageUrl;
-                            resultDiv.appendChild(imgElement);
-                            })
-                        .catch(error => {
-                            console.error('Error fetching image:', error);
-                            resultDiv.innerText += 'An error occurred fetching the image. Please try again later.';
-                        });
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                    resultDiv.innerText = 'An error occurred. Please try again later.';
+            try {
+                const response = await fetch('http://127.0.0.1:8055/api/stock/stocks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        company_name: companyName,
+                        shares: parseInt(shares, 10),
+                        purchase_price: parseFloat(purchasePrice),
+                        userID: userID
+                    })
                 });
+
+                if (response.ok) {
+                    alert('Stock added successfully!');
+                    fetchStocks(); // Refresh the stock list
+                } else {
+                    alert('Failed to add stock. Please check if your backend is running and CORS is configured.');
+                }
+            } catch (error) {
+                console.error('Error adding stock:', error);
+                alert('Error communicating with the backend. Make sure your server is running and accessible.');
+            }
+        };
+
+        async function fetchStocks() {
+            try {
+                const response = await fetch('http://127.0.0.1:8055/api/stock/stocks');
+                const stocks = await response.json();
+                const stocksList = document.getElementById('stocksList');
+                stocksList.innerHTML = ''; // Clear existing stocks
+                stocks.forEach(stock => {
+                    const stockItem = document.createElement('div');
+                    stockItem.className = 'stock-item';
+                    stockItem.innerHTML = `<strong>${stock.company_name}</strong> - Shares: ${stock.shares}, Purchase Price: ${stock.purchase_price}, Current Price: ${stock.current_price || 'N/A'}`;
+                    stocksList.appendChild(stockItem);
+                });
+            } catch (error) {
+                console.error('Error fetching stocks:', error);
+                alert('Error communicating with the backend. Make sure your server is running and accessible.');
+            }
         }
-                
-               
 
-    </script>           
+        // Initial fetch of stocks
+        fetchStocks();
+    </script>
 </body>
-
-
-
-<html>
-
-
+</html>
