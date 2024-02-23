@@ -49,11 +49,11 @@ type: hacks
           redirect: 'follow'
         };
 
-      fetch("http://127.0.0.1:8086/api/users/authenticate", requestOptions)
+      fetch("http://127.0.0.1:8055/api/users/authenticate", requestOptions)
           .then(response => {
             if (response.ok) {
                 console.log("User logged in successfully");
-                window.location.href = "https://eshaank1.github.io/csp//2023/08/31/Pacman.html"
+                window.location.href = "https://eshaank1.github.io/csp2/2024/02/14/songsearchtest.html"
               } else {
                 console.error("User login failed");
                 // You can handle failed login attempts here
@@ -92,7 +92,7 @@ type: hacks
     </p>
     <p>
      <button class="button-spacing">Log In</button>
-          <button onClick = "window.location.href ='https://eshaank1.github.io/csp//2024/02/04/SignupPage_IPYNB_2_.html'" class="button-spacing" >Sign Up</button>
+          <button onClick = "window.location.href ='https://eshaank1.github.io/csp2/2024/01/30/SignupPage.html'" class="button-spacing" >Sign Up</button>
 
       
     </p>

@@ -57,12 +57,12 @@ type: hacks
           redirect: 'follow'
         };
 
-      fetch("http://localhost:8086/api/users/", requestOptions)
+      fetch("http://localhost:8055/api/users/", requestOptions)
           .then(response => {
             if (response.ok) {
                 console.log("Successfully Signed Up");
                 alert("Account has been created. You will be directed to login page shortly.");
-                window.location.href = "https://eshaank1.github.io/csp//2024/02/04/LoginPage_IPYNB_2_.html"
+                window.location.href = "https://eshaank1.github.io/csp2/2024/01/30/LoginPage.html"
               } else {
                 console.error("Sign Up Failed");
                 // You can handle failed login attempts here

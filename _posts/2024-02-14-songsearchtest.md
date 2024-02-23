@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            background-color: #f0f0f0;
             margin: 0;
             padding: 0;
         }
@@ -15,15 +16,16 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background: linear-gradient(to bottom right, #66ccff, #6699ff);
+            background: linear-gradient(to bottom, #4e73df, #224abe);
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
             text-align: center;
             color: #fff;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
         }
 
         #search-box {
@@ -39,19 +41,22 @@
 
         input[type="text"],
         select {
-            padding: 8px;
+            padding: 10px;
             border-radius: 4px;
             border: none;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+            width: calc(100% - 20px);
         }
 
         button {
-            padding: 8px 20px;
+            padding: 10px 20px;
             border: none;
             border-radius: 4px;
             background-color: #007bff;
             color: #fff;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
 
         button:hover {
@@ -60,6 +65,7 @@
 
         #results {
             text-align: center;
+            margin-top: 20px;
         }
 
         .loader {
@@ -72,11 +78,6 @@
             margin: 20px auto;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         #song-list {
             list-style: none;
             padding: 0;
@@ -84,17 +85,18 @@
 
         .song-item {
             margin-bottom: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
+            padding: 20px;
+            background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .song-item img {
             width: 100px;
             height: 100px;
             border-radius: 8px;
-            margin-right: 10px;
+            margin-right: 20px;
+            object-fit: cover;
         }
 
         .song-item strong {
@@ -103,7 +105,7 @@
 
         audio {
             width: 100%;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
         @media (max-width: 600px) {
@@ -126,25 +128,7 @@
             <label for="song-search">Search for a song:</label>
             <input type="text" id="song-search" placeholder="Enter a song title">
             <button id="search-button">Search</button>
-        </div>
-
-        <div id="sorting-filtering">
-            <label for="sort-select">Sort by:</label>
-            <select id="sort-select">
-                <option value="trackName">Title</option>
-                <option value="artistName">Artist</option>
-                <option value="releaseDate">Release Date</option>
-            </select>
-
-            <label for="filter-select">Filter by Genre:</label>
-            <select id="filter-select">
-                <option value="">All Genres</option>
-                <option value="Rock">Rock</option>
-                <option value="Pop">Pop</option>
-                <option value="Hip-Hop">Hip-Hop</option>
-                <option value="Electronic">Electronic</option>
-                <!-- Add more genres as needed -->
-            </select>
+            <button id="explicit-filter-button">Explicit filter</button> <!-- New explicit filter button -->
         </div>
 
         <div id="results">
@@ -159,26 +143,30 @@
             performSearch();
         });
 
-        document.getElementById("filter-select").addEventListener("change", function () {
-            performSearch();
+        document.getElementById("explicit-filter-button").addEventListener("click", function () {
+            applyExplicitFilter();
         });
 
         function performSearch() {
             const searchTerm = document.getElementById("song-search").value;
-            const sortBy = document.getElementById("sort-select").value;
-            const filterBy = document.getElementById("filter-select").value;
-            searchForSongs(searchTerm, sortBy, filterBy);
+            searchForSongs(searchTerm);
         }
 
-        function searchForSongs(searchTerm, sortBy, filterBy) {
+        function applyExplicitFilter() {
+            const shouldFilter = !document.getElementById("explicit-filter-button").classList.contains("filtered");
+            if (shouldFilter) {
+                document.getElementById("explicit-filter-button").classList.add("filtered");
+            } else {
+                document.getElementById("explicit-filter-button").classList.remove("filtered");
+            }
+            performSearch();
+        }
+
+        function searchForSongs(searchTerm) {
             document.getElementById("loader").style.display = "block";
             document.getElementById("song-list").innerHTML = "";
 
-            let apiUrl = `https://itunes.apple.com/search?term=${searchTerm}&entity=song&limit=10&sort=${sortBy}`;
-
-            if (filterBy) {
-                apiUrl += `&genre=${encodeURIComponent(filterBy)}`;
-            }
+            const apiUrl = `https://itunes.apple.com/search?term=${searchTerm}&entity=song&limit=10`;
 
             fetch(apiUrl)
                 .then(response => response.json())
@@ -201,19 +189,21 @@
                 return;
             }
 
-            // Randomly hide some results
-            results.forEach(song => {
-                const shouldHide = Math.random() < 0.5; // Adjust the probability as needed
-                if (!shouldHide) {
-                    const listItem = document.createElement("li");
-                    listItem.className = "song-item";
-                    const albumImage = document.createElement("img");
-                    albumImage.src = song.artworkUrl100;
-                    listItem.appendChild(albumImage);
-                    listItem.innerHTML += `<strong>${song.trackName}</strong> by ${song.artistName}`;
-                    listItem.innerHTML += `<audio controls><source src="${song.previewUrl}" type="audio/mpeg"></audio>`;
-                    songList.appendChild(listItem);
-                }
+            let filteredResults = results;
+            const shouldFilter = document.getElementById("explicit-filter-button").classList.contains("filtered");
+            if (shouldFilter) {
+                filteredResults = results.filter(song => song.trackExplicitness !== "explicit");
+            }
+
+            filteredResults.forEach(song => {
+                const listItem = document.createElement("li");
+                listItem.className = "song-item";
+                const albumImage = document.createElement("img");
+                albumImage.src = song.artworkUrl100;
+                listItem.appendChild(albumImage);
+                listItem.innerHTML += `<strong>${song.trackName}</strong> by ${song.artistName}`;
+                listItem.innerHTML += `<audio controls><source src="${song.previewUrl}" type="audio/mpeg"></audio>`;
+                songList.appendChild(listItem);
             });
         }
     </script>

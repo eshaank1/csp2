@@ -165,11 +165,17 @@ courses: { compsci: {week: 0} }
 
     <script>
         document.getElementById("search-button").addEventListener("click", function () {
-            const searchTerm = document.getElementById("song-search").value;
-            searchForSongs(searchTerm);
+            searchForSongs();
         });
 
-        function searchForSongs(searchTerm) {
+        document.getElementById("song-search").addEventListener("keypress", function (event) {
+            if (event.key === 'Enter') {
+                searchForSongs();
+            }
+        });
+
+        function searchForSongs() {
+            const searchTerm = document.getElementById("song-search").value;
             // Display loading spinner while fetching data
             document.getElementById("loader").style.display = "block";
             document.getElementById("song-list").innerHTML = "";
