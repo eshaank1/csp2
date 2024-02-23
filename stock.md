@@ -6,6 +6,7 @@ title: StockSense
 type: hacks
 ---
 
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,17 +17,18 @@ type: hacks
         th, td { text-align: left; padding: 8px; border-bottom: 1px solid #ddd; }
         th { background-color: #f2f2f2; }
         input, button { margin: 5px 0; display: block; }
+        .profit { color: green; }
+        .loss { color: red; }
     </style>
 </head>
 <body>
-    <h2>Add Stock</h2>
+    <h2>Finacial Log</h2>
     <form id="addStockForm">
         <input type="text" id="companyName" placeholder="Company Name" required />
         <input type="number" id="shares" placeholder="Shares" required />
         <input type="number" step="0.01" id="purchasePrice" placeholder="Purchase Price" required />
         <input type="number" step="0.01" id="currentPrice" placeholder="Current Price" required />
-        <input type="hidden" id="userID" value="1" /> <!-- Adjust the value based on your user IDs -->
-        <button type="submit">Add Stock</button>
+        <button type="submit">Log Purchase</button>
     </form>
 
     <h2>Stocks</h2>
@@ -37,7 +39,7 @@ type: hacks
                 <th>Shares</th>
                 <th>Purchase Price</th>
                 <th>Current Price</th>
-                <th>User ID</th>
+                <th>Profit/Loss</th>
             </tr>
         </thead>
         <tbody>
@@ -52,7 +54,6 @@ type: hacks
             const shares = document.getElementById('shares').value;
             const purchasePrice = document.getElementById('purchasePrice').value;
             const currentPrice = document.getElementById('currentPrice').value;
-            const userID = document.getElementById('userID').value;
 
             try {
                 const response = await fetch('http://127.0.0.1:8055/api/stock/stocks', {
@@ -64,8 +65,7 @@ type: hacks
                         company_name: companyName,
                         shares: parseInt(shares, 10),
                         purchase_price: parseFloat(purchasePrice),
-                        current_price: parseFloat(currentPrice),
-                        userID: userID
+                        current_price: parseFloat(currentPrice)
                     })
                 });
 
@@ -89,11 +89,16 @@ type: hacks
                 stocksTableBody.innerHTML = ''; // Clear existing stocks
                 stocks.forEach(stock => {
                     const row = stocksTableBody.insertRow();
+                    const profitLoss = (stock.current_price - stock.purchase_price) * stock.shares;
+                    const profitLossClass = profitLoss >= 0 ? 'profit' : 'loss';
+
                     row.insertCell(0).textContent = stock.company_name;
                     row.insertCell(1).textContent = stock.shares;
                     row.insertCell(2).textContent = stock.purchase_price;
                     row.insertCell(3).textContent = stock.current_price || 'N/A';
-                    row.insertCell(4).textContent = stock.userID;
+                    const profitLossCell = row.insertCell(4);
+                    profitLossCell.textContent = profitLoss.toFixed(2);
+                    profitLossCell.classList.add(profitLossClass);
                 });
             } catch (error) {
                 console.error('Error fetching stocks:', error);
