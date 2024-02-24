@@ -2,9 +2,10 @@
 toc: true
 comments: false
 layout: post
-title: Stock Data Fetcher
+title: StockSense-Data
 type: hacks
 ---
+
 
 <html lang="en">
 <head>
@@ -40,9 +41,22 @@ type: hacks
             color: white;
             cursor: pointer;
             transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+            animation: pulse 1s infinite; /* Apply animation */
         }
         button:hover {
             background-color: #218838; /* Darker green on hover */
+            animation: none; /* Disable animation on hover */
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
         #stockData {
             background-color: #ffffff;
@@ -60,7 +74,12 @@ type: hacks
     </style>
 </head>
 <body>
-    <h1>Stock Data Fetcher</h1>
+    <p>Open: Refers to the price of a stock at the beginning of a trading session. It represents the first transaction or trade of the day for a particular stock.</p>
+    <p>High: Represents the highest price at which a stock was traded during a specific period, typically within a trading day.</p>
+    <p>Low: Indicates the lowest price at which a stock was traded during a specific period, usually within a trading day.</p>
+    <p>Close: Refers to the final price at which a stock was traded at the end of a trading session. It represents the last transaction or trade of the day for a particular stock.</p>
+    <p>Volume: Represents the total number of shares of a particular stock that were traded during a specific period, such as a trading day. It indicates the level of activity or liquidity in the market for that stock.</p>
+    <h1>Stock Data Fetcher - Anagha</h1>
     <input type="text" id="stockSymbol" placeholder="Enter Stock Symbol (e.g., AAPL)">
     <button onclick="fetchStockData()">Fetch Stock Data</button>
 
