@@ -53,7 +53,7 @@ type: hacks
           .then(response => {
             if (response.ok) {
                 console.log("User logged in successfully");
-                window.location.href = "https://eshaank1.github.io/csp2/2024/02/14/songsearchtest.html"
+                window.location.href = "https://eshaank1.github.io/csp2/stocktest.html"
               } else {
                 console.error("User login failed");
                 // You can handle failed login attempts here
