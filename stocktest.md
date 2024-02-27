@@ -112,7 +112,6 @@ type: hacks
             const latestData = timeSeries[latestDate];
 
             const content = `
-                <p>Date: ${latestDate}</p>
                 <p>Open: ${latestData['1. open']}</p>
                 <p>High: ${latestData['2. high']}</p>
                 <p>Low: ${latestData['3. low']}</p>
