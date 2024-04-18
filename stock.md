@@ -89,7 +89,7 @@ type: hacks
 
 </head>
 <body>
-    <h2>Financial Log - Miheer</h2>
+    <h2>Financial Log </h2>
     <form id="addStockForm">
         <input type="text" id="companyName" placeholder="Company Name" required />
         <input type="number" id="shares" placeholder="Shares" required />

@@ -15,7 +15,7 @@ search_exclude: true
     <h1>Stocksense Homepage</h1>
   </header>
   
-  <main>
+  <main>w
     <section id="stock-tickers">
       <h2>Stock Tickers</h2>
       <div id="ticker-container"></div>
